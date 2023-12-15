@@ -41,7 +41,11 @@ def process():
 
     # List of specific PDFs to process
     pdf_docs= [
-        'nlp1.pdf',
+        'b1.pdf',
+        'b2.pdf',
+        'b3.pdf',
+        'b4.pdf',
+        'b5.pdf'
         # Add more PDFs as needed
     ]
     raw_text = get_pdf_text(pdf_docs)
