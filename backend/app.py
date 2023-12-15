@@ -73,7 +73,7 @@ def get_pdf_text(pdf_files):
     # Extract PDF text and process
     text = ""
     for pdf_file in pdf_files:
-        pdf_path = f"{pdf_file}"
+        pdf_path = pdf_file
         pdf_text = extract_text_from_pdf(pdf_path)
         text += pdf_text
 
