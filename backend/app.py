@@ -1,7 +1,6 @@
 # Filename - server.py
 
 from flask import Flask, jsonify, request
-import streamlit as st
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
@@ -28,6 +27,15 @@ state_data = {
     # Add other relevant data
 }
 
+@app.route('/reset', methods=['GET'])
+@cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
+def reset():
+    global conversation_chain
+    conversation_chain = None
+    process()
+
+    return jsonify({'status': 'success', 'message': 'State reset successfully'})
+
 def process():
     global conversation_chain
 
@@ -49,7 +57,8 @@ def ask():
     user_question = request.args.get('user_question')
     # user_question = data.get('user_question')
  
-    print(user_question)
+    # print(user_question)
+    # print(conversation_chain)
     if not conversation_chain:
         return jsonify({'status': 'error', 'message': 'Conversation chain not initialized'})
 
@@ -65,7 +74,6 @@ def ask():
         else:
             formatted_response.append({'type': 'bot', 'content': message.content})
 
-        print(message.content)
     return jsonify({'status': 'success', 'chat_history': formatted_response})
 
 
@@ -73,7 +81,7 @@ def get_pdf_text(pdf_files):
     # Extract PDF text and process
     text = ""
     for pdf_file in pdf_files:
-        pdf_path = f"{pdf_file}"
+        pdf_path = pdf_file
         pdf_text = extract_text_from_pdf(pdf_path)
         text += pdf_text
 
@@ -111,6 +119,8 @@ def get_conversation_chain(vectorstore):
         retriever=vectorstore.as_retriever(),
         memory=memory
     )
+    print('conv chain created')
+
     return conversation_chain
 
 @app.route('/')
@@ -120,5 +130,4 @@ def get():
 # Running app
 if __name__ == '__main__':
     load_dotenv()
-    process()
     app.run(host="0.0.0.0")
