@@ -4,7 +4,7 @@
 The Subject Chatbot helps the student to ask some basic questions about the given subject(I have considered AI and ML books for traning it).
 
 ## How to run it
-Project consists of both frontend react and backend flask components. Below, you'll find explanations of the working of each folder, along with the commands to run the Python (backend) and React (frontend) applications.
+The project consists of both frontend react and backend flask components. Below, you'll find explanations of the working of each folder, along with the commands to run the Python (backend) and React (frontend) applications.
 
 - run frontend react app
 ``` 
@@ -18,7 +18,7 @@ npm start
 pip install -r requirements.txt
 python app.py
 ```
-Note: before executing the above commands, be sure you are in the respective folder.
+Note: Before executing the above commands, be sure you are in the respective folder.
 
 ### Frontend
 The `frontend` folder contains the user interface components of the chatbot which is created using react and react-three/fiber
@@ -29,11 +29,11 @@ The `frontend` folder contains the user interface components of the chatbot whic
 
 ### Backend
 #### Features
-- Backend is designed using flask.
-- We take the input from the user and using langchain we get the answer from the pretrained openAI network and then send back the answer to the user.
+- Backend is designed using Flask.
+- We take the input from the user and using langchain we get the answer from the pre-trained openAI network and then send back the answer to the user.
 
 
-![image](ui.JPG)
+![image](frontend/ui.JPG)
 
 
 
