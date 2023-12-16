@@ -40,6 +40,7 @@ def process():
 
     # List of specific PDFs to process
     pdf_docs= [
+
         # 'b1.pdf',
         # 'b2.pdf',
         # 'b3.pdf',
