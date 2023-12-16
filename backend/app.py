@@ -32,7 +32,6 @@ state_data = {
 def reset():
     global conversation_chain
     conversation_chain = None
-    process()
 
     return jsonify({'status': 'success', 'message': 'State reset successfully'})
 
@@ -41,23 +40,27 @@ def process():
 
     # List of specific PDFs to process
     pdf_docs= [
-        'nlp1.pdf',
+        # 'b1.pdf',
+        # 'b2.pdf',
+        # 'b3.pdf',
+        'b4.pdf',
+        'b5.pdf'
         # Add more PDFs as needed
     ]
     raw_text = get_pdf_text(pdf_docs)
     text_chunks = get_text_chunks(raw_text)
+    # print(text_chunks[:1])
+    print('-------------------------------')
     vectorstore = get_vectorstore(text_chunks)
     conversation_chain = get_conversation_chain(vectorstore)
 
 
-@app.route('/ask', methods=['GET'])
-@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@app.route('/ask')
+# @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def ask():
     # data = request.get_json()
     user_question = request.args.get('user_question')
     # user_question = data.get('user_question')
- 
-    # print(user_question)
     # print(conversation_chain)
     if not conversation_chain:
         return jsonify({'status': 'error', 'message': 'Conversation chain not initialized'})
@@ -98,11 +101,11 @@ def extract_text_from_pdf(pdf):
     
 def get_text_chunks(text):
     text_splitter = CharacterTextSplitter(
-        separator="\n",
-        chunk_size=1000,
-        chunk_overlap=200,
-        length_function=len
-    )
+            separator="\n",
+            chunk_size=1000,
+            chunk_overlap=200,
+            length_function=len
+        )
     chunks = text_splitter.split_text(text)
     return chunks
 
@@ -130,4 +133,5 @@ def get():
 # Running app
 if __name__ == '__main__':
     load_dotenv()
+    process()
     app.run(host="0.0.0.0")
