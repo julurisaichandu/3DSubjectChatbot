@@ -36,7 +36,7 @@ The backend is designed using Flask.
 
 ### Deployed working prototype
 - The working prototype can be checked in this URL- https://3-d-subject-chatbot.vercel.app/
-
+- **Note that the answer to your question may be delayed because of the free hosting for the backend flask app by 'Render'**
 ### Note: These are the features yet to be added
 1. Need to serve different sessions for different users
 2. Reset functionality for the existing user and erase the conversation to start a new convo.
